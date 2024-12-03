@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OS_Site</title>
+    <style>
+        * {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-image: url('360_F_391461057_5P0BOWl4lY442Zoo9rzEeJU0S2c1WDZR.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .head {
+            margin: 0;
+            padding: 20px 0;
+            color: licensable;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none; 
+            color: aliceblue; 
+            margin: 0 10px; 
+        }
+
+        nav a:hover {
+            color: #f0f0f0; 
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .login, .pass {
+            width: 210px;
+            height: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .login:hover, .pass:hover {
+            width: 250px;
+            background-color: white;
+            border-radius: 20px;
+        }
+
+        .logins {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btlogin, .btsign {
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btlogin:hover, .btsign:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .box {
+            background-image: url("omar.webp");
+            width: 500px;
+            height: 350px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 5fr 3fr;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <header class="head">
+        <h1>OS_Site</h1>
+    </header>
+
+    <div class="box">
+        <h1>Hello</h1>
+        <div class="col">
+            <input type="text" placeholder="Username" class="login">
+            <input type="password" placeholder="Password" class="pass">
+            <div class="logins">
+                <button class="btlogin">Login</button>
+                <button class="btsign">Signup</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.btlogin').addEventListener('click', function() {
+            const emailInput = document.querySelector('.login');
+            const passwordInput = document.querySelector('.pass');
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+        
+            // Clear previous placeholder messages
+            emailInput.placeholder = "Username";
+            passwordInput.placeholder = "Password";
+        
+            if (!email && !password) {
+                emailInput.value = "";
+                passwordInput.value = "";
+                emailInput.placeholder = "Enter your email";
+                passwordInput.placeholder = "Enter your password";
+            } else if (!email) {
+                emailInput.value = "";
+                emailInput.placeholder = "Enter your email";
+            } else if (!password) {
+                passwordInput.value = "";
+                passwordInput.placeholder = "Enter your password";
+            } else {
+                // Navigate to dashboard with a welcome message
+                localStorage.setItem('userEmail', email);
+                window.location.href = 'index1.html';
+            }
+            
+        });
+        
+        document.querySelector('.btsign').addEventListener('click', function() {
+            // Navigate to the signup page
+            window.location.href = 'signup.html'; // Replace 'signup.html' with the actual path to your signup page
+        });
+        document.querySelector('.sign').addEventListener('click', function() {
+                const usernameInput = document.querySelector('.user');
+                const emailInput = document.querySelector('.email');
+                const passwordInput = document.querySelector('.password');
+                const ageInput = document.querySelector('.age');
+                const messageDiv = document.querySelector('.message');
+
+                const username = usernameInput.value.trim();
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+                const age = ageInput.value.trim();
+
+                // Clear any previous message
+                messageDiv.textContent = "";
+
+                // Check if all fields are filled
+                if (!username || !email || !password || !age) {
+                    messageDiv.textContent = "Please fill out the application form.";
+                    if (!username) usernameInput.placeholder = "Enter Username";
+                    if (!email) emailInput.placeholder = "Enter Email";
+                    if (!password) passwordInput.placeholder = "Enter Password";
+                    if (!age) ageInput.placeholder = "Enter Age";
+                } else {
+                    // Store user info in localStorage and redirect to dashboard
+                    localStorage.setItem('username', username);
+                    window.location.href = 'index1.html';
+                }
+            });
+    </script>
+</body>
+</html>

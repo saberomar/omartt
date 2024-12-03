@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OS_Site</title>
+    <style>
+        body{
+            background-image: url('360_F_391461057_5P0BOWl4lY442Zoo9rzEeJU0S2c1WDZR.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .box {
+            background-image: url('omar.webp');
+            width: 500px;
+            height: 350px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 5fr 3fr;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .box:hover {
+            transform: scale(1.1);
+        }
+        .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .user, .email, .password, .age {
+            width: 210px;
+            height: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .user:hover, .email:hover, .password:hover, .age:hover {
+            width: 250px;
+            background-color: white;
+            border-radius: 20px;
+        }
+        .signs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sign {
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .sign:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="col">
+            <input type="text" placeholder="Username" class="user">
+            <input type="email" placeholder="Email" class="email">
+        </div>
+        <div class="col">
+            <input type="password" placeholder="Password" class="password">
+            <input type="number" placeholder="Age" class="age">
+        </div>
+        <div class="signs">
+            <button class="sign">Signup</button>
+        </div>
+        <div class="message"></div>
+    </div>
+    <script>
+        const signupButton = document.querySelector('.sign');
+        const usernameInput = document.querySelector('.user');
+        const emailInput = document.querySelector('.email');
+        const passwordInput = document.querySelector('.password');
+        const ageInput = document.querySelector('.age');
+        const messageDiv = document.querySelector('.message');
+
+        // Show message when signup is pressed
+        signupButton.addEventListener('click', function() {
+            const username = usernameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            const age = ageInput.value.trim();
+
+            // Clear previous message
+            messageDiv.textContent = '';
+
+            // Check if all fields are filled
+            if (!username || !email || !password || !age) {
+                messageDiv.textContent = "Please fill out the application form.";
+                if (!username) {
+                    usernameInput.placeholder = "Enter Username";
+                }
+                if (!email) {
+                    emailInput.placeholder = "Enter Email";
+                }
+                if (!password) {
+                    passwordInput.placeholder = "Enter Password";
+                }
+                if (!age) {
+                    ageInput.placeholder = "Enter Age";
+                }
+            } else {
+                messageDiv.textContent = ""; // Clear the message when all fields are filled
+                localStorage.setItem('username', username);
+                localStorage.setItem('email', email);
+                localStorage.setItem('password', password);
+                localStorage.setItem('age', age);
+
+                // Redirect to a dashboard or another page
+                window.location.href = 'dashboard.html'; // Replace with the desired page
+            }
+        });
+
+        // Handle login button
+        const loginButton = document.createElement('button');
+        //loginButton.textContent = 'Login';
+        //document.body.appendChild(loginButton);
+
+        loginButton.addEventListener('click', function() {
+            // Clear signup input fields
+            usernameInput.value = '';
+            emailInput.value = '';
+            passwordInput.value = '';
+            ageInput.value = '';
+
+            // Fill signup username with the stored username from login
+            const storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                usernameInput.value = storedUsername;
+            }
+
+            // Optionally, you can change the button text or style to indicate it's in login mode
+            loginButton.textContent = 'Login';
+        });
+    </script>
+</body>
+</html>
